@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Gift Card</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #1e3c72, rgb(73, 103, 154));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+    }
+    .heart-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    .heart {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      background: rgb(151, 73, 73);
+      transform: rotate(-45deg);
+      margin: auto;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: rgb(151, 73, 73);
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -100px;
+      left: 0;
+    }
+    .heart::after {
+      left: 100px;
+      top: 0;
+    }
+    .heart-inner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+      width: 150px;
+      z-index: 10;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    }
+    .yay-button {
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9em;
+      margin-top: 10px;
+    }
+    .claim-message {
+      display: none;
+      margin-top: 10px;
+      font-size: 1em;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const bestieName = sessionStorage.getItem("bestie_name");
+      if (!bestieName) {
+        window.location.href = "login.html";
+      }
+    });
+    
+    function showClaim() {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+      setTimeout(function() {
+        document.getElementById("claimMessage").style.display = "block";
+      }, 500);
+    }
+  </script>
+</head>
+<body>
+  <div class="heart-container">
+    <div class="heart">
+      <div class="heart-inner">
+        <p>Enjoy your Minecraft account</p>
+        <button class="yay-button" onclick="showClaim()">Yay!</button>
+        <p class="claim-message" id="claimMessage">contact 94518592 to claim</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
